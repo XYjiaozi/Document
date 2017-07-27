@@ -181,3 +181,35 @@ git confg alias.last 'log -1'
 git confg alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 ```
 - 搭建Git服务器 [教程地址](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137583770360579bc4b458f044ce7afed3df579123eca000)
+git remote -v 查看远程仓库
+git remote rm 远程仓库的名字  删除远程仓库
+git checkout -b dev 创建并切换dev分支
+git merge --no-ff -m "merged bug fix 101" issue-101 合并分支 issue-101
+git branch -d issue-101 删除分支issue-101
+git stash 当手头工作没有完成时，先把工作现场git stash一下，
+          然后去修复bug，修复后，再git stash pop，回到工作现场
+git stash list 查看隐藏分支列表
+一是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；
+另一种方式是用git stash pop，恢复的同时把stash内容也删了：
+你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
+$ git stash apply stash@{0}
+$ git branch dev 创建分支
+$ git checkout dev 切换分支
+git log --graph --pretty=oneline --abbrev-commit 用git log看看分支历史
+开发一个新feature，最好新建一个分支；
+如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
+
+
+1）当执行 git push -u origin master时出现了错误：
+ [remote rejected] master -> master (push declined due to email privacy restri                                                                                                                                                                                               ctions)
+error: failed to push some refs to 'https://github.com/XYjiaozi/learngit.git'
+时
+解决办法如下：
+进入我的github主页点击Settings
+然后点击左边的Email,找到Block command line pushes that expose my email复选框，取消掉即可，也就是不打勾状态。
+之后就可以发现可以正常push。
+
+2）使用Git命令每次提交都要输入用户名和密码的解决办法：
+正确的做法如下：
+2)git remote add origin https://username:password@github.com/username/test.git
+3)git push -u origin master
